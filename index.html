@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>EcoCash - Loan Quote</title>
     <style>
         * {
             margin: 0;
@@ -13,152 +13,316 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            background-color: #f2f2f2;
+            padding: 0;
+            margin: 0;
         }
 
-        .login-container {
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
+        /* Header */
+        .header {
+            background-color: #006b3a;
+            padding: 20px 16px 16px 16px;
         }
 
-        .logo {
-            margin-bottom: 40px;
-        }
-
-        .logo h1 {
-            font-size: 32px;
-            color: #006b3a;
-            font-weight: 700;
-        }
-
-        .phone-input {
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
+        .header h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
             margin-bottom: 20px;
-            display: flex;
-            background: white;
         }
 
-        .country-code {
-            background: #f5f5f5;
-            padding: 15px;
+        /* Progress steps exactly like image */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .step {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+        .step.active {
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 16px;
+        }
+
+        /* White card */
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 24px 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+
+        .card > p {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 24px;
+        }
+
+        /* Loan Amount Section */
+        .loan-amount-section {
+            margin-bottom: 24px;
+        }
+
+        .amount-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .amount-header span:first-child {
+            font-size: 16px;
             font-weight: 500;
-            border-right: 1px solid #ddd;
+            color: #1a1a1a;
         }
 
-        .phone-input input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            outline: none;
+        .amount-value {
             font-size: 16px;
+            font-weight: 600;
+            color: #006b3a;
         }
 
-        input[type="password"] {
+        /* Slider */
+        input[type="range"] {
             width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-bottom: 20px;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #e0e0e0;
+            border-radius: 2px;
             outline: none;
         }
 
-        input:focus {
-            border-color: #006b3a;
-        }
-
-        .login-btn {
-            width: 100%;
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
             background: #006b3a;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* Loan Term Section */
+        .loan-term-section {
+            margin-bottom: 0;
+        }
+
+        .term-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .term-header span:first-child {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .term-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #006b3a;
+        }
+
+        /* Green summary box */
+        .summary-box {
+            background-color: #006b3a;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .summary-row:first-child {
+            margin-bottom: 12px;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .summary-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Interest rate text */
+        .interest-note {
+            text-align: center;
+            font-size: 11px;
+            color: #8c8c8c;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            padding: 0 8px;
+        }
+
+        /* Continue button */
+        .continue-btn {
+            width: 100%;
+            background-color: #006b3a;
             color: white;
             border: none;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 14px;
+            border-radius: 40px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 20px;
+            transition: background-color 0.2s;
         }
 
-        .help-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .help-btn {
-            flex: 1;
-            background: #f5f5f5;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .version {
-            margin-top: 30px;
-            color: #999;
-            font-size: 12px;
+        .continue-btn:active {
+            background-color: #005a30;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo">
-            <h1>EcoCash</h1>
+
+    <!-- Header with EcoCash and progress steps exactly like image -->
+    <div class="header">
+        <h1>EcoCash</h1>
+        <div class="progress-steps">
+            <span class="step active">1. Loan</span>
+            <span class="step">2. Details</span>
+            <span class="step">3. Personal</span>
+            <span class="step">4. Address</span>
+            <span class="step">5. Work</span>
+            <span class="step">6. Review</span>
         </div>
-        
-        <div class="phone-input">
-            <span class="country-code">+263</span>
-            <input type="tel" id="phone" placeholder="Enter your phone number">
+    </div>
+
+    <!-- Main content -->
+    <div class="container">
+        <!-- White card with sliders -->
+        <div class="card">
+            <h2>Get Your Loan Quote</h2>
+            <p>Adjust the sliders to see your personalized loan terms</p>
+            
+            <!-- Loan Amount Slider -->
+            <div class="loan-amount-section">
+                <div class="amount-header">
+                    <span>Loan Amount</span>
+                    <span class="amount-value" id="amountDisplay">$200</span>
+                </div>
+                <input type="range" id="loanAmount" min="50" max="1000" step="10" value="200">
+            </div>
+            
+            <!-- Loan Term Slider -->
+            <div class="loan-term-section">
+                <div class="term-header">
+                    <span>Loan Term</span>
+                    <span class="term-value" id="termDisplay">12 months</span>
+                </div>
+                <input type="range" id="loanTerm" min="3" max="36" step="1" value="12">
+            </div>
         </div>
-        
-        <input type="password" id="pin" maxlength="4" placeholder="Enter your PIN">
-        
-        <button class="login-btn" onclick="login()">Login</button>
-        
-        <div class="help-buttons">
-            <button class="help-btn" onclick="register()">Register</button>
-            <button class="help-btn" onclick="help()">Help & Support</button>
+
+        <!-- Green summary box with monthly repayment and total repayable -->
+        <div class="summary-box">
+            <div class="summary-row">
+                <span class="summary-label">Monthly Repayment</span>
+                <span class="summary-value" id="monthlyPayment">$17.12</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Total Repayable</span>
+                <span class="summary-value" id="totalRepayable">$205.46</span>
+            </div>
         </div>
-        
-        <div class="version">v4.0.1P</div>
+
+        <!-- Interest rate note -->
+        <div class="interest-note">
+            Annual Interest Rate: 5.00% (fixed). Rates may vary based on creditworthiness and loan type.
+        </div>
+
+        <!-- Continue button -->
+        <button class="continue-btn" onclick="continueToNext()">Continue</button>
     </div>
 
     <script>
-        function login() {
-            const phone = document.getElementById('phone').value;
-            const pin = document.getElementById('pin').value;
+        // Get elements
+        const amountSlider = document.getElementById('loanAmount');
+        const termSlider = document.getElementById('loanTerm');
+        const amountDisplay = document.getElementById('amountDisplay');
+        const termDisplay = document.getElementById('termDisplay');
+        const monthlyPaymentSpan = document.getElementById('monthlyPayment');
+        const totalRepayableSpan = document.getElementById('totalRepayable');
+
+        // Function to calculate loan payments
+        function calculateLoan() {
+            const amount = parseFloat(amountSlider.value);
+            const months = parseInt(termSlider.value);
+            const annualRate = 0.05; // 5% interest
+            const monthlyRate = annualRate / 12;
             
-            if(!phone || !pin) {
-                alert('Please enter your phone number and PIN');
-                return;
+            let monthlyPayment, totalRepayable;
+            
+            if (monthlyRate === 0) {
+                monthlyPayment = amount / months;
+            } else {
+                monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
             }
             
-            if(pin.length !== 4) {
-                alert('PIN must be 4 digits');
-                return;
-            }
+            totalRepayable = monthlyPayment * months;
             
-            localStorage.setItem('userPhone', '+263' + phone);
-            window.location.href = 'loan-quote.html';
+            // Update display
+            amountDisplay.textContent = '$' + amount;
+            termDisplay.textContent = months + ' months';
+            monthlyPaymentSpan.textContent = '$' + monthlyPayment.toFixed(2);
+            totalRepayableSpan.textContent = '$' + totalRepayable.toFixed(2);
+            
+            // Save to localStorage for next pages
+            localStorage.setItem('loanAmount', amount);
+            localStorage.setItem('loanTerm', months);
+            localStorage.setItem('monthlyPayment', monthlyPayment.toFixed(2));
+            localStorage.setItem('totalRepayable', totalRepayable.toFixed(2));
         }
-        
-        function register() {
-            alert('To register an EcoCash wallet, please visit your nearest EcoCash agent.');
+
+        // Add event listeners
+        amountSlider.addEventListener('input', calculateLoan);
+        termSlider.addEventListener('input', calculateLoan);
+
+        // Function to go to next page
+        function continueToNext() {
+            window.location.href = 'loan-details.html';
         }
-        
-        function help() {
-            alert('EcoCash Support: Dial 114 from your Econet line');
-        }
+
+        // Initial calculation
+        calculateLoan();
     </script>
+
 </body>
 </html>
