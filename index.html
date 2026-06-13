@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>EcoCash - Loan Quote</title>
+    <title>EcoCash - Loan Details</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,7 @@
             margin-bottom: 20px;
         }
 
-        /* Progress steps exactly like image */
+        /* Progress steps */
         .progress-steps {
             display: flex;
             justify-content: space-between;
@@ -68,138 +68,131 @@
             font-size: 20px;
             font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .card > p {
             font-size: 14px;
             color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        /* Info box with loan amount and term */
+        .info-box {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 16px;
             margin-bottom: 24px;
         }
 
-        /* Loan Amount Section */
-        .loan-amount-section {
-            margin-bottom: 24px;
-        }
-
-        .amount-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 12px;
-        }
-
-        .amount-header span:first-child {
-            font-size: 16px;
-            font-weight: 500;
-            color: #1a1a1a;
-        }
-
-        .amount-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: #006b3a;
-        }
-
-        /* Slider */
-        input[type="range"] {
-            width: 100%;
-            height: 4px;
-            -webkit-appearance: none;
-            background: #e0e0e0;
-            border-radius: 2px;
-            outline: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: #006b3a;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-
-        /* Loan Term Section */
-        .loan-term-section {
-            margin-bottom: 0;
-        }
-
-        .term-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 12px;
-        }
-
-        .term-header span:first-child {
-            font-size: 16px;
-            font-weight: 500;
-            color: #1a1a1a;
-        }
-
-        .term-value {
-            font-size: 16px;
-            font-weight: 600;
-            color: #006b3a;
-        }
-
-        /* Green summary box */
-        .summary-box {
-            background-color: #006b3a;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 16px;
-        }
-
-        .summary-row {
+        .info-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
-        .summary-row:first-child {
-            margin-bottom: 12px;
-        }
-
-        .summary-row:last-child {
+        .info-row:last-child {
             margin-bottom: 0;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .summary-label {
+        .info-label {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.9);
+            color: #6c757d;
         }
 
-        .summary-value {
+        .info-value {
             font-size: 16px;
             font-weight: 600;
-            color: white;
+            color: #006b3a;
         }
 
-        /* Interest rate text */
-        .interest-note {
-            text-align: center;
-            font-size: 11px;
-            color: #8c8c8c;
-            line-height: 1.4;
-            margin-bottom: 20px;
-            padding: 0 8px;
+        /* Section title */
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            margin-top: 8px;
         }
 
-        /* Continue button */
-        .continue-btn {
+        /* Loan types list */
+        .loan-types {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .type-item {
+            display: flex;
+            align-items: center;
+            padding: 4px 0;
+        }
+
+        .type-item input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 12px;
+            accent-color: #006b3a;
+            cursor: pointer;
+        }
+
+        .type-item label {
+            font-size: 15px;
+            color: #1a1a1a;
+            cursor: pointer;
+        }
+
+        /* Textarea for loan purpose */
+        .purpose-textarea {
             width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            outline: none;
+            margin-bottom: 8px;
+        }
+
+        .purpose-textarea:focus {
+            border-color: #006b3a;
+        }
+
+        /* Button group */
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .back-btn {
+            flex: 1;
+            background-color: #e9ecef;
+            color: #1a1a1a;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:active {
+            background-color: #dee2e6;
+        }
+
+        .continue-btn {
+            flex: 1;
             background-color: #006b3a;
             color: white;
             border: none;
             padding: 14px;
             border-radius: 40px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s;
@@ -212,12 +205,12 @@
 </head>
 <body>
 
-    <!-- Header with EcoCash and progress steps exactly like image -->
+    <!-- Header -->
     <div class="header">
         <h1>EcoCash</h1>
         <div class="progress-steps">
-            <span class="step active">1. Loan</span>
-            <span class="step">2. Details</span>
+            <span class="step">1. Loan</span>
+            <span class="step active">2. Details</span>
             <span class="step">3. Personal</span>
             <span class="step">4. Address</span>
             <span class="step">5. Work</span>
@@ -227,101 +220,103 @@
 
     <!-- Main content -->
     <div class="container">
-        <!-- White card with sliders -->
         <div class="card">
-            <h2>Get Your Loan Quote</h2>
-            <p>Adjust the sliders to see your personalized loan terms</p>
+            <h2>Loan Details</h2>
+            <p>Tell us more about your loan needs</p>
             
-            <!-- Loan Amount Slider -->
-            <div class="loan-amount-section">
-                <div class="amount-header">
-                    <span>Loan Amount</span>
-                    <span class="amount-value" id="amountDisplay">$200</span>
+            <!-- Loan amount and term display -->
+            <div class="info-box">
+                <div class="info-row">
+                    <span class="info-label">Loan Amount:</span>
+                    <span class="info-value" id="displayAmount">$200</span>
                 </div>
-                <input type="range" id="loanAmount" min="50" max="1000" step="10" value="200">
+                <div class="info-row">
+                    <span class="info-label">Loan Term:</span>
+                    <span class="info-value" id="displayTerm">12 months</span>
+                </div>
             </div>
             
-            <!-- Loan Term Slider -->
-            <div class="loan-term-section">
-                <div class="term-header">
-                    <span>Loan Term</span>
-                    <span class="term-value" id="termDisplay">12 months</span>
+            <!-- Loan Type section -->
+            <div class="section-title">Loan Type</div>
+            <div class="loan-types">
+                <div class="type-item">
+                    <input type="radio" name="loanType" id="personalLoan" value="Personal Loan">
+                    <label for="personalLoan">Personal Loan</label>
                 </div>
-                <input type="range" id="loanTerm" min="3" max="36" step="1" value="12">
+                <div class="type-item">
+                    <input type="radio" name="loanType" id="businessLoan" value="Business Loan">
+                    <label for="businessLoan">Business Loan</label>
+                </div>
+                <div class="type-item">
+                    <input type="radio" name="loanType" id="educationLoan" value="Education Loan">
+                    <label for="educationLoan">Education Loan</label>
+                </div>
+                <div class="type-item">
+                    <input type="radio" name="loanType" id="emergencyLoan" value="Emergency Loan">
+                    <label for="emergencyLoan">Emergency Loan</label>
+                </div>
+            </div>
+            
+            <!-- Loan Purpose section -->
+            <div class="section-title">Loan Purpose</div>
+            <textarea class="purpose-textarea" id="loanPurpose" rows="3" placeholder="Describe why you need this loan . . ."></textarea>
+            
+            <!-- Buttons -->
+            <div class="button-group">
+                <button class="back-btn" onclick="goBack()">Back</button>
+                <button class="continue-btn" onclick="goNext()">Continue</button>
             </div>
         </div>
-
-        <!-- Green summary box with monthly repayment and total repayable -->
-        <div class="summary-box">
-            <div class="summary-row">
-                <span class="summary-label">Monthly Repayment</span>
-                <span class="summary-value" id="monthlyPayment">$17.12</span>
-            </div>
-            <div class="summary-row">
-                <span class="summary-label">Total Repayable</span>
-                <span class="summary-value" id="totalRepayable">$205.46</span>
-            </div>
-        </div>
-
-        <!-- Interest rate note -->
-        <div class="interest-note">
-            Annual Interest Rate: 5.00% (fixed). Rates may vary based on creditworthiness and loan type.
-        </div>
-
-        <!-- Continue button -->
-        <button class="continue-btn" onclick="continueToNext()">Continue</button>
     </div>
 
     <script>
-        // Get elements
-        const amountSlider = document.getElementById('loanAmount');
-        const termSlider = document.getElementById('loanTerm');
-        const amountDisplay = document.getElementById('amountDisplay');
-        const termDisplay = document.getElementById('termDisplay');
-        const monthlyPaymentSpan = document.getElementById('monthlyPayment');
-        const totalRepayableSpan = document.getElementById('totalRepayable');
-
-        // Function to calculate loan payments
-        function calculateLoan() {
-            const amount = parseFloat(amountSlider.value);
-            const months = parseInt(termSlider.value);
-            const annualRate = 0.05; // 5% interest
-            const monthlyRate = annualRate / 12;
+        // Display loan amount and term from previous page
+        window.onload = function() {
+            const loanAmount = localStorage.getItem('loanAmount') || '200';
+            const loanTerm = localStorage.getItem('loanTerm') || '12';
             
-            let monthlyPayment, totalRepayable;
+            document.getElementById('displayAmount').innerText = '$' + loanAmount;
+            document.getElementById('displayTerm').innerText = loanTerm + ' months';
+        };
+        
+        // Get selected loan type
+        function getSelectedLoanType() {
+            const radios = document.getElementsByName('loanType');
+            for(let i = 0; i < radios.length; i++) {
+                if(radios[i].checked) {
+                    return radios[i].value;
+                }
+            }
+            return null;
+        }
+        
+        // Go to next page
+        function goNext() {
+            const selectedType = getSelectedLoanType();
+            const purpose = document.getElementById('loanPurpose').value;
             
-            if (monthlyRate === 0) {
-                monthlyPayment = amount / months;
-            } else {
-                monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+            if(!selectedType) {
+                alert('Please select a loan type');
+                return;
             }
             
-            totalRepayable = monthlyPayment * months;
+            if(!purpose.trim()) {
+                alert('Please describe your loan purpose');
+                return;
+            }
             
-            // Update display
-            amountDisplay.textContent = '$' + amount;
-            termDisplay.textContent = months + ' months';
-            monthlyPaymentSpan.textContent = '$' + monthlyPayment.toFixed(2);
-            totalRepayableSpan.textContent = '$' + totalRepayable.toFixed(2);
+            // Save to localStorage
+            localStorage.setItem('loanType', selectedType);
+            localStorage.setItem('loanPurpose', purpose);
             
-            // Save to localStorage for next pages
-            localStorage.setItem('loanAmount', amount);
-            localStorage.setItem('loanTerm', months);
-            localStorage.setItem('monthlyPayment', monthlyPayment.toFixed(2));
-            localStorage.setItem('totalRepayable', totalRepayable.toFixed(2));
+            // Go to personal info page
+            window.location.href = 'personal-info.html';
         }
-
-        // Add event listeners
-        amountSlider.addEventListener('input', calculateLoan);
-        termSlider.addEventListener('input', calculateLoan);
-
-        // Function to go to next page
-        function continueToNext() {
-            window.location.href = 'loan-details.html';
+        
+        // Go back to previous page
+        function goBack() {
+            window.location.href = 'loan-quote.html';
         }
-
-        // Initial calculation
-        calculateLoan();
     </script>
 
 </body>
