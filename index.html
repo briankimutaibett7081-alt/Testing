@@ -1,9 +1,9 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>EcoCash - Personal Information</title>
+    <title>EcoCash - Loan Quote</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #f5f5f5;
             padding: 0;
             margin: 0;
         }
@@ -31,16 +31,23 @@
             margin-bottom: 20px;
         }
 
-        /* Progress steps */
+        /* Progress steps - numbers on top, labels below */
         .progress-steps {
             display: flex;
             justify-content: space-between;
         }
 
         .step {
+            text-align: center;
             color: rgba(255, 255, 255, 0.6);
             font-size: 12px;
             font-weight: normal;
+        }
+
+        .step .step-number {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
         }
 
         .step.active {
@@ -68,7 +75,7 @@
             font-size: 20px;
             font-weight: 600;
             color: #1a1a1a;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .card > p {
@@ -77,81 +84,129 @@
             margin-bottom: 24px;
         }
 
-        /* Form groups */
-        .form-group {
-            margin-bottom: 18px;
+        /* Loan Amount Section */
+        .loan-amount-section {
+            margin-bottom: 24px;
         }
 
-        label {
-            display: block;
-            font-size: 14px;
+        .amount-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .amount-header span:first-child {
+            font-size: 16px;
             font-weight: 500;
             color: #1a1a1a;
-            margin-bottom: 6px;
         }
 
-        input, select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-size: 15px;
-            font-family: inherit;
-            outline: none;
-            background-color: white;
-        }
-
-        input:focus, select:focus {
-            border-color: #006b3a;
-        }
-
-        input::placeholder {
-            color: #adb5bd;
-            font-size: 14px;
-        }
-
-        /* Row for first name and last name */
-        .row {
-            display: flex;
-            gap: 15px;
-        }
-
-        .row .form-group {
-            flex: 1;
-        }
-
-        /* Button group */
-        .button-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        .back-btn {
-            flex: 1;
-            background-color: #e9ecef;
-            color: #1a1a1a;
-            border: none;
-            padding: 14px;
-            border-radius: 40px;
-            font-size: 15px;
+        .amount-value {
+            font-size: 16px;
             font-weight: 600;
+            color: #006b3a;
+        }
+
+        /* Slider */
+        input[type="range"] {
+            width: 100%;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #e0e0e0;
+            border-radius: 2px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #006b3a;
+            border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        .back-btn:active {
-            background-color: #dee2e6;
+        /* Loan Term Section */
+        .loan-term-section {
+            margin-bottom: 0;
         }
 
+        .term-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .term-header span:first-child {
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a1a;
+        }
+
+        .term-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #006b3a;
+        }
+
+        /* Green summary box */
+        .summary-box {
+            background-color: #006b3a;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .summary-row:first-child {
+            margin-bottom: 12px;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .summary-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .summary-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        /* Interest rate text */
+        .interest-note {
+            text-align: center;
+            font-size: 11px;
+            color: #8c8c8c;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            padding: 0 8px;
+        }
+
+        /* Continue button */
         .continue-btn {
-            flex: 1;
+            width: 100%;
             background-color: #006b3a;
             color: white;
             border: none;
             padding: 14px;
             border-radius: 40px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.2s;
@@ -164,137 +219,127 @@
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header with EcoCash and progress steps -->
     <div class="header">
         <h1>EcoCash</h1>
         <div class="progress-steps">
-            <span class="step">1. Loan</span>
-            <span class="step">2. Details</span>
-            <span class="step active">3. Personal</span>
-            <span class="step">4. Address</span>
-            <span class="step">5. Work</span>
-            <span class="step">6. Review</span>
+            <div class="step active">
+                <div class="step-number">1</div>
+                <div>Loan</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div>Details</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>Personal</div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div>Address</div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div>Work</div>
+            </div>
+            <div class="step">
+                <div class="step-number">6</div>
+                <div>Review</div>
+            </div>
         </div>
     </div>
 
     <!-- Main content -->
     <div class="container">
+        <!-- White card with sliders -->
         <div class="card">
-            <h2>Personal Information</h2>
-            <p>We need your details to process your application</p>
+            <h2>Get Your Loan Quote</h2>
+            <p>Adjust the sliders to see your personalized loan terms</p>
             
-            <!-- First Name and Last Name in a row -->
-            <div class="row">
-                <div class="form-group">
-                    <label>First Name</label>
-                    <input type="text" id="firstName" placeholder="Enter your first name">
+            <!-- Loan Amount Slider -->
+            <div class="loan-amount-section">
+                <div class="amount-header">
+                    <span>Loan Amount</span>
+                    <span class="amount-value" id="amountDisplay">$50</span>
                 </div>
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <input type="text" id="lastName" placeholder="Enter your last name">
+                <input type="range" id="loanAmount" min="50" max="1000" step="10" value="50">
+            </div>
+            
+            <!-- Loan Term Slider -->
+            <div class="loan-term-section">
+                <div class="term-header">
+                    <span>Loan Term</span>
+                    <span class="term-value" id="termDisplay">3 months</span>
                 </div>
-            </div>
-            
-            <!-- Gender -->
-            <div class="form-group">
-                <label>Gender</label>
-                <select id="gender">
-                    <option value="">Select gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            
-            <!-- Date of Birth -->
-            <div class="form-group">
-                <label>Date of Birth</label>
-                <input type="date" id="dob" placeholder="Enter your date of birth">
-            </div>
-            
-            <!-- National ID Number -->
-            <div class="form-group">
-                <label>National ID Number</label>
-                <input type="text" id="nationalId" placeholder="e.g. 63-123456A78">
-            </div>
-            
-            <!-- Email Address -->
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email address">
-            </div>
-            
-            <!-- Phone Number -->
-            <div class="form-group">
-                <label>Phone Number</label>
-                <input type="tel" id="phone" placeholder="Enter your phone number">
-            </div>
-            
-            <!-- Buttons -->
-            <div class="button-group">
-                <button class="back-btn" onclick="goBack()">Back</button>
-                <button class="continue-btn" onclick="goNext()">Continue</button>
+                <input type="range" id="loanTerm" min="3" max="36" step="1" value="3">
             </div>
         </div>
+
+        <!-- Green summary box -->
+        <div class="summary-box">
+            <div class="summary-row">
+                <span class="summary-label">Monthly Repayment</span>
+                <span class="summary-value" id="monthlyPayment">$16.81</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Total Repayable</span>
+                <span class="summary-value" id="totalRepayable">$50.42</span>
+            </div>
+        </div>
+
+        <!-- Interest rate note -->
+        <div class="interest-note">
+            Annual Interest Rate: 5.00% (fixed). Rates may vary based on creditworthiness and loan type.
+        </div>
+
+        <!-- Continue button -->
+        <button class="continue-btn" onclick="continueToNext()">Continue</button>
     </div>
 
     <script>
-        // Go to next page
-        function goNext() {
-            const firstName = document.getElementById('firstName').value;
-            const lastName = document.getElementById('lastName').value;
-            const gender = document.getElementById('gender').value;
-            const dob = document.getElementById('dob').value;
-            const nationalId = document.getElementById('nationalId').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
+        const amountSlider = document.getElementById('loanAmount');
+        const termSlider = document.getElementById('loanTerm');
+        const amountDisplay = document.getElementById('amountDisplay');
+        const termDisplay = document.getElementById('termDisplay');
+        const monthlyPaymentSpan = document.getElementById('monthlyPayment');
+        const totalRepayableSpan = document.getElementById('totalRepayable');
+
+        function calculateLoan() {
+            const amount = parseFloat(amountSlider.value);
+            const months = parseInt(termSlider.value);
+            const annualRate = 0.05;
+            const monthlyRate = annualRate / 12;
             
-            if(!firstName) {
-                alert('Please enter your first name');
-                return;
-            }
-            if(!lastName) {
-                alert('Please enter your last name');
-                return;
-            }
-            if(!gender) {
-                alert('Please select your gender');
-                return;
-            }
-            if(!dob) {
-                alert('Please enter your date of birth');
-                return;
-            }
-            if(!nationalId) {
-                alert('Please enter your National ID number');
-                return;
-            }
-            if(!email) {
-                alert('Please enter your email address');
-                return;
-            }
-            if(!phone) {
-                alert('Please enter your phone number');
-                return;
+            let monthlyPayment, totalRepayable;
+            
+            if (monthlyRate === 0) {
+                monthlyPayment = amount / months;
+            } else {
+                monthlyPayment = (amount * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
             }
             
-            // Save to localStorage
-            localStorage.setItem('firstName', firstName);
-            localStorage.setItem('lastName', lastName);
-            localStorage.setItem('gender', gender);
-            localStorage.setItem('dob', dob);
-            localStorage.setItem('nationalId', nationalId);
-            localStorage.setItem('email', email);
-            localStorage.setItem('phone', phone);
+            totalRepayable = monthlyPayment * months;
             
-            // Go to address page
-            window.location.href = 'address.html';
+            amountDisplay.textContent = '$' + amount;
+            termDisplay.textContent = months + ' months';
+            monthlyPaymentSpan.textContent = '$' + monthlyPayment.toFixed(2);
+            totalRepayableSpan.textContent = '$' + totalRepayable.toFixed(2);
+            
+            localStorage.setItem('loanAmount', amount);
+            localStorage.setItem('loanTerm', months);
+            localStorage.setItem('monthlyPayment', monthlyPayment.toFixed(2));
+            localStorage.setItem('totalRepayable', totalRepayable.toFixed(2));
         }
-        
-        // Go back to previous page
-        function goBack() {
+
+        amountSlider.addEventListener('input', calculateLoan);
+        termSlider.addEventListener('input', calculateLoan);
+
+        function continueToNext() {
             window.location.href = 'loan-details.html';
         }
+
+        calculateLoan();
     </script>
 
 </body>
